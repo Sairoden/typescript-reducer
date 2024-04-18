@@ -1,7 +1,7 @@
 //  LIBRARIES
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type CartItem = {
+export type CartItem = {
   id: string;
   title: string;
   price: number;
@@ -31,6 +31,7 @@ export const cartSlice = createSlice({
       if (itemIndex >= 0) state.items[itemIndex].quantity++;
       else state.items.push({ ...action.payload, quantity: 1 });
     },
+
     removeFromCart: (state, action: PayloadAction<{ id: string }>) => {
       const itemIndex = state.items.findIndex(
         item => item.id === action.payload.id

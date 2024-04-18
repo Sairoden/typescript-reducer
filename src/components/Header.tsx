@@ -4,8 +4,14 @@ import { useState } from "react";
 // COMPONENTS
 import { Cart } from "./index";
 
+// STORE
+import { useCartSelector } from "../store/hooks";
+
 function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
+  const cartQuantity = useCartSelector(state =>
+    state.items.reduce((acc, curr) => acc + curr.quantity, 0)
+  );
 
   const handleOpenCartClick = () => {
     setCartIsVisible(true);
@@ -26,7 +32,7 @@ function Header() {
         </div>
 
         <p>
-          <button onClick={handleOpenCartClick}>Cart (0)</button>
+          <button onClick={handleOpenCartClick}>Cart ({cartQuantity})</button>
         </p>
       </header>
     </>
